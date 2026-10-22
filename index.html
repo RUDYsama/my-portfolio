@@ -32,6 +32,10 @@
             --shadow-hover: 0 12px 30px -4px rgba(15, 23, 42, 0.1);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-page);
@@ -188,19 +192,7 @@
             z-index: 4;
         }
 
-        .avatar-hint {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.82rem;
-            color: var(--primary);
-            background: var(--primary-soft);
-            border: 1px solid #dbeafe;
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-bottom: 24px;
-            transition: all 0.2s ease;
-        }
+
 
         .hero-title {
             font-weight: 800;
@@ -476,9 +468,7 @@
                     <img id="avatar-secondary" class="avatar-img" src="images/profile2.png" alt="Profile Secondary">
                 </div>
             </div>
-            <div>
-                <span class="avatar-hint"><i class="bi bi-arrow-repeat"></i> คลิกที่รูปเพื่อหมุนสลับภาพ</span>
-            </div>
+
 
             <h1 class="hero-title">
                 สวัสดีครับ ผม <span class="name-highlight">Rudy</span>
@@ -691,62 +681,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // --- 1. Pure Smooth Inertia Wheel Scroll ---
-        (function() {
-            let targetY = window.scrollY;
-            let currentY = window.scrollY;
-            let isRunning = false;
-            const easeFactor = 0.12; // ตอบสนองไว ลื่นไหล ไม่หน่วง
-
-            window.addEventListener('wheel', function(e) {
-                e.preventDefault();
-                const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-                targetY = Math.max(0, Math.min(maxScroll, targetY + e.deltaY));
-
-                if (!isRunning) {
-                    isRunning = true;
-                    requestAnimationFrame(animateScroll);
-                }
-            }, { passive: false });
-
-            function animateScroll() {
-                currentY += (targetY - currentY) * easeFactor;
-                window.scrollTo(0, currentY);
-
-                if (Math.abs(targetY - currentY) > 0.5) {
-                    requestAnimationFrame(animateScroll);
-                } else {
-                    window.scrollTo(0, targetY);
-                    currentY = targetY;
-                    isRunning = false;
-                }
-            }
-
-            window.addEventListener('scroll', function() {
-                if (!isRunning) {
-                    targetY = window.scrollY;
-                    currentY = window.scrollY;
-                }
-            }, { passive: true });
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId && targetId !== '#') {
-                        const elem = document.querySelector(targetId);
-                        if (elem) {
-                            e.preventDefault();
-                            const topPos = elem.getBoundingClientRect().top + window.scrollY - 80;
-                            targetY = Math.max(0, topPos);
-                            if (!isRunning) {
-                                isRunning = true;
-                                requestAnimationFrame(animateScroll);
-                            }
-                        }
+        // --- 1. Native Smooth Anchor Navigation (Zero wheel lag or drift) ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    const elem = document.querySelector(targetId);
+                    if (elem) {
+                        e.preventDefault();
+                        const navbarHeight = 80;
+                        const targetPosition = elem.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
                     }
-                });
+                }
             });
-        })();
+        });
 
         // --- 2. Interactive Profile Avatar: Synchronized Spin (0.55s) + Crossfade in-flight ---
         const avatarWrapper = document.getElementById('avatarWrapper');
