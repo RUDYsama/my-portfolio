@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rudy | IT Portfolio & Developer</title>
+    <title>Rudy | IT Portfolio</title>
     
     <!-- Google Fonts: Inter & Prompt -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,73 +17,83 @@
     
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --surface-color: #111827;
-            --surface-card: rgba(17, 24, 39, 0.75);
-            --surface-border: rgba(255, 255, 255, 0.08);
-            --primary: #6366f1;
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
-            --accent-cyan: #38bdf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --bg-page: #f8fafc;
+            --surface-card: #ffffff;
+            --border-light: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --text-heading: #0f172a;
+            --text-body: #475569;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-soft: #eff6ff;
+            --primary-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+            --shadow-hover: 0 12px 30px -4px rgba(15, 23, 42, 0.1);
         }
 
         body {
             font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-page);
+            color: var(--text-body);
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Ambient Glow Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1000px;
-            height: 600px;
-            background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(99, 102, 241, 0.18), transparent 70%);
-            pointer-events: none;
+        /* Subtle modern backdrop */
+        .page-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 480px;
+            background: radial-gradient(circle at 50% -20%, #e0e7ff 0%, #f1f5f9 60%, transparent 100%);
             z-index: 0;
+            pointer-events: none;
         }
 
-        /* Modern Frosted Navbar */
+        /* Clean Frosted Light Navbar */
         .navbar-custom {
-            background: rgba(11, 15, 25, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--surface-border);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
             transition: all 0.3s ease;
         }
 
         .navbar-brand {
             font-weight: 700;
             letter-spacing: -0.5px;
-            color: var(--text-main);
+            color: var(--text-heading);
+            font-size: 1.15rem;
+        }
+
+        .brand-badge {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-link {
             color: var(--text-muted);
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             font-weight: 500;
             padding: 8px 16px !important;
             transition: color 0.2s ease;
         }
 
         .nav-link:hover {
-            color: #ffffff;
+            color: var(--primary);
         }
 
         /* Hero Section */
         .hero-section {
-            padding: 120px 0 70px 0;
+            padding: 130px 0 50px 0;
             position: relative;
             z-index: 1;
         }
@@ -93,12 +103,13 @@
             align-items: center;
             gap: 8px;
             padding: 6px 16px;
-            border-radius: 30px;
-            background: rgba(99, 102, 241, 0.12);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #a5b4fc;
-            font-size: 0.85rem;
+            border-radius: 9999px;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            color: var(--text-heading);
+            font-size: 0.88rem;
             font-weight: 500;
+            box-shadow: var(--shadow-subtle);
             margin-bottom: 24px;
         }
 
@@ -107,63 +118,39 @@
             height: 8px;
             background-color: #10b981;
             border-radius: 50%;
-            box-shadow: 0 0 10px #10b981;
+            box-shadow: 0 0 8px #10b981;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.15); }
         }
 
-        .hero-title {
-            font-weight: 800;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            line-height: 1.15;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
-        }
-
-        .gradient-text {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            font-weight: 400;
-        }
-
-        /* Interactive Profile Avatar with 360 Spin & Crossfade */
+        /* Interactive Profile Avatar: 360 Spin + Fade */
         .avatar-container {
             position: relative;
             width: 170px;
             height: 170px;
-            margin: 0 auto 28px auto;
+            margin: 0 auto 16px auto;
             cursor: pointer;
             user-select: none;
-            perspective: 1000px;
         }
 
         .avatar-glow {
             position: absolute;
             inset: -4px;
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #93c5fd, #c4b5fd);
             border-radius: 50%;
-            filter: blur(12px);
+            filter: blur(10px);
             opacity: 0.6;
-            transition: opacity 0.4s ease, filter 0.4s ease;
+            transition: all 0.3s ease;
             z-index: 1;
         }
 
         .avatar-container:hover .avatar-glow {
-            opacity: 0.95;
-            filter: blur(16px);
+            opacity: 0.9;
+            filter: blur(14px);
         }
 
         .avatar-inner {
@@ -172,12 +159,12 @@
             height: 100%;
             border-radius: 50%;
             padding: 4px;
-            background: rgba(17, 24, 39, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.15);
+            background: #ffffff;
+            border: 3px solid #ffffff;
             z-index: 2;
             overflow: hidden;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15);
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .avatar-img {
@@ -188,7 +175,7 @@
             height: calc(100% - 8px);
             border-radius: 50%;
             object-fit: cover;
-            transition: opacity 0.6s ease-in-out;
+            transition: opacity 0.55s ease-in-out;
         }
 
         #avatar-primary {
@@ -205,219 +192,80 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.78rem;
-            color: #a5b4fc;
-            background: rgba(99, 102, 241, 0.12);
-            border: 1px solid rgba(99, 102, 241, 0.25);
-            padding: 4px 12px;
+            font-size: 0.82rem;
+            color: var(--primary);
+            background: var(--primary-soft);
+            border: 1px solid #dbeafe;
+            padding: 4px 14px;
             border-radius: 20px;
-            margin-top: -12px;
             margin-bottom: 24px;
             transition: all 0.2s ease;
         }
 
-        .avatar-container:hover + .avatar-hint {
-            background: rgba(99, 102, 241, 0.25);
-            color: #ffffff;
-            transform: translateY(-2px);
+        .hero-title {
+            font-weight: 800;
+            font-size: clamp(2.3rem, 5vw, 3.8rem);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            color: var(--text-heading);
+            margin-bottom: 14px;
         }
 
-        /* Glassmorphism Cards */
-        .glass-card {
+        .hero-title .name-highlight {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto 32px auto;
+            line-height: 1.6;
+        }
+
+        /* Modern Clean Cards */
+        .clean-card {
             background: var(--surface-card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--surface-border);
+            border: 1px solid var(--border-light);
             border-radius: 20px;
-            padding: 30px;
+            padding: 32px;
+            box-shadow: var(--shadow-card);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            overflow: hidden;
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        .clean-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-hover);
         }
 
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.45);
-        }
-
-        /* Section Headings */
-        .section-header {
-            margin-bottom: 35px;
-        }
-
-        .section-badge {
+        /* Section Titles */
+        .section-tag {
             display: inline-block;
             font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--accent-cyan);
-            margin-bottom: 8px;
-        }
-
-        .section-title {
-            font-size: 1.85rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .section-heading {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text-heading);
             letter-spacing: -0.02em;
-            color: #ffffff;
+            margin-bottom: 24px;
         }
 
-        /* Skill Pills */
-        .skill-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #e2e8f0;
-            margin: 4px;
-            transition: all 0.25s ease;
-        }
-
-        .skill-item:hover {
-            background: rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.4);
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        .skill-item i {
-            font-size: 1.1rem;
-            color: var(--accent-cyan);
-        }
-
-        /* Course Item */
-        .course-card {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 16px 20px;
-            transition: all 0.2s ease;
-        }
-
-        .course-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(99, 102, 241, 0.3);
-            transform: translateX(4px);
-        }
-
-        /* Project Cards */
-        .project-card {
-            background: rgba(17, 24, 39, 0.8);
-            border: 1px solid var(--surface-border);
-            border-radius: 18px;
-            padding: 26px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 16px 36px -12px rgba(99, 102, 241, 0.2);
-            transform: translateY(-4px);
-        }
-
-        .project-badge {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-muted);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-weight: 500;
-        }
-
-        /* QR Frame */
-        .qr-box {
-            background: #ffffff;
-            padding: 14px;
-            border-radius: 16px;
-            display: inline-block;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .qr-box:hover {
-            transform: scale(1.04);
-        }
-
-        /* Buttons */
-        .btn-modern-primary {
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-modern-primary:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-modern-ghost {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-modern-ghost:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--surface-border);
-            padding: 50px 0 40px 0;
-            margin-top: 100px;
-            background: #070a11;
-        }
-
-        /* Info Item List */
+        /* Info Item Rows */
         .info-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
         }
 
         .info-row:last-child {
@@ -426,30 +274,173 @@
 
         .info-label {
             color: var(--text-muted);
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .info-value {
             font-weight: 600;
-            color: #ffffff;
+            color: var(--text-heading);
             font-size: 0.95rem;
+        }
+
+        /* Clean Skill Tags */
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-heading);
+            margin: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-soft);
+            border-color: #bfdbfe;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .skill-tag i {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        /* Course Item Cards */
+        .course-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 18px 20px;
+            transition: all 0.2s ease;
+        }
+
+        .course-box:hover {
+            background: #ffffff;
+            border-color: #bfdbfe;
+            box-shadow: var(--shadow-subtle);
+            transform: translateX(4px);
+        }
+
+        /* Project Cards */
+        .project-item {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+        }
+
+        .project-item:hover {
+            border-color: #bfdbfe;
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .project-pill {
+            font-size: 0.76rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #f1f5f9;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* QR Code Box */
+        .qr-wrapper {
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            padding: 16px;
+            border-radius: 16px;
+            display: inline-block;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s ease;
+        }
+
+        .qr-wrapper:hover {
+            transform: scale(1.03);
+        }
+
+        /* Action Buttons */
+        .btn-brand {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-brand:hover {
+            background: #1d4ed8;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline-clean {
+            background: #ffffff;
+            color: var(--text-heading);
+            border: 1px solid var(--border-light);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline-clean:hover {
+            background: #f8fafc;
+            color: var(--primary);
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        /* Clean Footer */
+        footer {
+            background: #ffffff;
+            border-top: 1px solid var(--border-light);
+            padding: 48px 0;
+            margin-top: 80px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Sticky Frosted Navbar -->
+    <div class="page-backdrop"></div>
+
+    <!-- Clean Frosted Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <span class="badge rounded-circle p-2" style="background: var(--primary-gradient);"><i class="bi bi-code-slash text-white"></i></span>
-                <span>Rudy<span class="gradient-text">.dev</span></span>
+                <span class="brand-badge"><i class="bi bi-code-slash text-white"></i></span>
+                <span>Rudy<span class="text-primary">.portfolio</span></span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <i class="bi bi-list text-white fs-3"></i>
+                <i class="bi bi-list text-dark fs-3"></i>
             </button>
             <div class="collapse navbar-collapse" id="navContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
@@ -458,7 +449,7 @@
                     <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a href="https://github.com/RUDYsama" target="_blank" class="btn btn-modern-ghost btn-sm py-1 px-3">
+                        <a href="https://github.com/RUDYsama" target="_blank" class="btn btn-outline-clean btn-sm py-1 px-3">
                             <i class="bi bi-github"></i> GitHub
                         </a>
                     </li>
@@ -475,13 +466,13 @@
                 <span>Information Technology Student • Available for Projects</span>
             </div>
 
-            <!-- Profile Avatar with Click Spin & Crossfade -->
+            <!-- Profile Avatar (Click Spin 360° + Crossfade) -->
             <div class="avatar-container" id="avatarWrapper" title="คลิกเพื่อหมุนและสลับรูปโปรไฟล์">
                 <div class="avatar-glow"></div>
                 <div class="avatar-inner" id="avatarInner">
-                    <!-- รูปหลัก 1: รูปจากแฟ้มงาน (1792639148056.jpg) -->
+                    <!-- รูปหลัก: รูปจากแฟ้มงาน (profile1.jpg) -->
                     <img id="avatar-primary" class="avatar-img" src="images/profile1.jpg" alt="Profile Primary">
-                    <!-- รูปที่ 2: รูปใหม่สำหรับสลับ (profile2.png) -->
+                    <!-- รูปสลับ: Angry Bird (profile2.png) -->
                     <img id="avatar-secondary" class="avatar-img" src="images/profile2.png" alt="Profile Secondary">
                 </div>
             </div>
@@ -490,18 +481,19 @@
             </div>
 
             <h1 class="hero-title">
-                สวัสดีครับ ผม <span class="gradient-text">Rudy</span>
+                สวัสดีครับ ผม <span class="name-highlight">Rudy</span>
             </h1>
             <p class="hero-subtitle">
-                นิสิตสาขาเทคโนโลยีสารสนเทศ (Information Technology) มุ่งเน้นการพัฒนาเว็บแอปพลิเคชันและระบบสารสนเทศสมัยใหม่
+                นิสิตสาขาเทคโนโลยีสารสนเทศ (Information Technology)<br class="d-none d-md-block">
+                มุ่งมั่นพัฒนาเว็บแอปพลิเคชันและการจัดการ Version Control อย่างเป็นระบบ
             </p>
 
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="#projects" class="btn-modern-primary">
-                    <i class="bi bi-grid-fill"></i> ดูผลงานของฉัน
+                <a href="#projects" class="btn-brand">
+                    <i class="bi bi-folder-check"></i> ผลงานของฉัน
                 </a>
-                <a href="#about" class="btn-modern-ghost">
-                    <i class="bi bi-person-lines-fill"></i> ข้อมูลส่วนตัว
+                <a href="#about" class="btn-outline-clean">
+                    <i class="bi bi-person-circle"></i> ข้อมูลส่วนตัว
                 </a>
             </div>
         </div>
@@ -514,10 +506,10 @@
             <!-- Left Column: About Me & QR Code -->
             <div class="col-lg-5" id="about">
                 <!-- Personal Info Card -->
-                <div class="glass-card mb-4">
-                    <div class="section-header mb-3">
-                        <span class="section-badge"><i class="bi bi-person-badge me-1"></i> About Me</span>
-                        <h2 class="section-title h4 mb-0">ข้อมูลส่วนตัว</h2>
+                <div class="clean-card mb-4">
+                    <div class="mb-3">
+                        <span class="section-tag"><i class="bi bi-person-lines-fill me-1"></i> About Me</span>
+                        <h2 class="section-heading mb-0">ข้อมูลส่วนตัว</h2>
                     </div>
 
                     <div class="info-list">
@@ -526,8 +518,8 @@
                             <span class="info-value">Rudy</span>
                         </div>
                         <div class="info-row">
-                            <span class="info-label"><i class="bi bi-card-heading text-primary"></i> รหัสนิสิต</span>
-                            <span class="info-value text-info font-monospace">67310079</span>
+                            <span class="info-label"><i class="bi bi-card-text text-primary"></i> รหัสนิสิต</span>
+                            <span class="info-value text-primary font-monospace fw-bold">67310079</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="bi bi-mortarboard text-primary"></i> สาขาวิชา</span>
@@ -535,33 +527,33 @@
                         </div>
                         <div class="info-row">
                             <span class="info-label"><i class="bi bi-envelope text-primary"></i> อีเมล</span>
-                            <span class="info-value text-truncate" style="max-width: 200px;">Nutbotluvpotato@gmail.com</span>
+                            <span class="info-value text-truncate" style="max-width: 210px;">Nutbotluvpotato@gmail.com</span>
                         </div>
                     </div>
 
-                    <div class="mt-4 pt-3 border-top border-secondary border-opacity-10">
+                    <div class="mt-4 pt-3 border-top border-light">
                         <div class="d-flex gap-2">
-                            <a href="https://github.com/RUDYsama" target="_blank" class="btn btn-modern-ghost flex-fill justify-content-center">
-                                <i class="bi bi-github"></i> RUDYsama
+                            <a href="https://github.com/RUDYsama" target="_blank" class="btn btn-outline-clean flex-fill justify-content-center">
+                                <i class="bi bi-github"></i> GitHub Profile
                             </a>
-                            <a href="mailto:Nutbotluvpotato@gmail.com" class="btn btn-modern-primary flex-fill justify-content-center">
-                                <i class="bi bi-send-fill"></i> ติดต่ออีเมล
+                            <a href="mailto:Nutbotluvpotato@gmail.com" class="btn btn-brand flex-fill justify-content-center">
+                                <i class="bi bi-envelope-fill"></i> ติดต่ออีเมล
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- GitHub Profile QR Code Card -->
-                <div class="glass-card text-center">
-                    <div class="section-header mb-3">
-                        <span class="section-badge"><i class="bi bi-qr-code-scan me-1"></i> Scan Profile</span>
-                        <h2 class="section-title h5 mb-0">GitHub Portfolio QR Code</h2>
+                <div class="clean-card text-center">
+                    <div class="mb-3">
+                        <span class="section-tag"><i class="bi bi-qr-code-scan me-1"></i> Scan Profile</span>
+                        <h2 class="section-heading mb-0" style="font-size: 1.3rem;">GitHub Profile QR Code</h2>
                     </div>
                     
-                    <div class="qr-box mb-3">
+                    <div class="qr-wrapper mb-3">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/RUDYsama" alt="GitHub Profile QR Code" class="img-fluid" width="140" height="140">
                     </div>
-                    <p class="small text-muted mb-0">สแกนด้วยสมาร์ทโฟนเพื่อเข้าชม GitHub Profile โดยตรง</p>
+                    <p class="small text-muted mb-0">สแกน QR Code ด้วยกล้องสมาร์ทโฟนเพื่อเข้าชมโปรไฟล์</p>
                 </div>
             </div>
 
@@ -569,110 +561,110 @@
             <div class="col-lg-7">
                 
                 <!-- Skills Section -->
-                <div class="glass-card mb-4" id="skills">
-                    <div class="section-header">
-                        <span class="section-badge"><i class="bi bi-lightning-charge me-1"></i> Capabilities</span>
-                        <h2 class="section-title h4 mb-1">ความสามารถด้าน IT (Skills)</h2>
-                        <p class="text-muted small mb-0">ทักษะด้านเทคโนโลยีและเครื่องมือการพัฒนา</p>
+                <div class="clean-card mb-4" id="skills">
+                    <div class="mb-3">
+                        <span class="section-tag"><i class="bi bi-lightning-charge me-1"></i> Capabilities</span>
+                        <h2 class="section-heading mb-1">ความสามารถด้าน IT (Skills)</h2>
+                        <p class="text-muted small mb-0">ทักษะด้านเทคโนโลยีและเครื่องมือพัฒนาซอฟต์แวร์</p>
                     </div>
 
-                    <div class="d-flex flex-wrap">
-                        <div class="skill-item"><i class="bi bi-git"></i> Git & GitHub</div>
-                        <div class="skill-item"><i class="bi bi-filetype-html"></i> HTML5 & Semantic Web</div>
-                        <div class="skill-item"><i class="bi bi-filetype-css"></i> CSS3 & Modern Styling</div>
-                        <div class="skill-item"><i class="bi bi-bootstrap"></i> Bootstrap 5</div>
-                        <div class="skill-item"><i class="bi bi-filetype-js"></i> JavaScript (ES6+)</div>
-                        <div class="skill-item"><i class="bi bi-cloud-check"></i> GitHub Pages Deployment</div>
-                        <div class="skill-item"><i class="bi bi-diagram-3"></i> System & Network Basics</div>
-                        <div class="skill-item"><i class="bi bi-terminal"></i> Command Line & Shell</div>
+                    <div class="d-flex flex-wrap pt-2">
+                        <div class="skill-tag"><i class="bi bi-git"></i> Git & GitHub</div>
+                        <div class="skill-tag"><i class="bi bi-filetype-html"></i> HTML5 / Web Standards</div>
+                        <div class="skill-tag"><i class="bi bi-filetype-css"></i> CSS3 & Modern Styling</div>
+                        <div class="skill-tag"><i class="bi bi-bootstrap"></i> Bootstrap 5</div>
+                        <div class="skill-tag"><i class="bi bi-filetype-js"></i> JavaScript (ES6+)</div>
+                        <div class="skill-tag"><i class="bi bi-cloud-check"></i> GitHub Pages Deployment</div>
+                        <div class="skill-tag"><i class="bi bi-hdd-network"></i> Computer Systems & Network</div>
+                        <div class="skill-tag"><i class="bi bi-terminal"></i> Command Line & Git Bash</div>
                     </div>
                 </div>
 
                 <!-- Courses Section -->
-                <div class="glass-card mb-4" id="courses">
-                    <div class="section-header">
-                        <span class="section-badge"><i class="bi bi-journal-bookmark me-1"></i> Academic</span>
-                        <h2 class="section-title h4 mb-1">รายวิชาที่เรียน (Courses)</h2>
-                        <p class="text-muted small mb-0">หลักสูตรพื้นฐานและวิชาเฉพาะทางด้านเทคโนโลยีสารสนเทศ</p>
+                <div class="clean-card mb-4" id="courses">
+                    <div class="mb-3">
+                        <span class="section-tag"><i class="bi bi-journal-bookmark me-1"></i> Curriculum</span>
+                        <h2 class="section-heading mb-1">รายวิชาที่เรียน (Courses)</h2>
+                        <p class="text-muted small mb-0">รายวิชาในหลักสูตรเทคโนโลยีสารสนเทศ</p>
                     </div>
 
-                    <div class="row g-3">
+                    <div class="row g-3 pt-2">
                         <div class="col-sm-6">
-                            <div class="course-card">
+                            <div class="course-box">
                                 <div class="d-flex align-items-center gap-2 mb-1">
                                     <i class="bi bi-laptop text-primary fs-5"></i>
-                                    <span class="fw-semibold text-white">Web Development</span>
+                                    <span class="fw-semibold text-dark">Web Development</span>
                                 </div>
                                 <span class="small text-muted">เทคโนโลยีการพัฒนาเว็บแอปพลิเคชัน</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="course-card">
+                            <div class="course-box">
                                 <div class="d-flex align-items-center gap-2 mb-1">
-                                    <i class="bi bi-database text-info fs-5"></i>
-                                    <span class="fw-semibold text-white">Database Systems</span>
+                                    <i class="bi bi-database text-primary fs-5"></i>
+                                    <span class="fw-semibold text-dark">Database Systems</span>
                                 </div>
-                                <span class="small text-muted">ระบบฐานข้อมูลและการจัดการ</span>
+                                <span class="small text-muted">ระบบฐานข้อมูลและการจัดเก็บข้อมูล</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="course-card">
+                            <div class="course-box">
                                 <div class="d-flex align-items-center gap-2 mb-1">
-                                    <i class="bi bi-router text-success fs-5"></i>
-                                    <span class="fw-semibold text-white">Computer Networks</span>
+                                    <i class="bi bi-router text-primary fs-5"></i>
+                                    <span class="fw-semibold text-dark">Computer Networks</span>
                                 </div>
-                                <span class="small text-muted">ระบบเครือข่ายและการสื่อสาร</span>
+                                <span class="small text-muted">ระบบเครือข่ายคอมพิวเตอร์และการสื่อสาร</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="course-card">
+                            <div class="course-box">
                                 <div class="d-flex align-items-center gap-2 mb-1">
-                                    <i class="bi bi-cpu text-warning fs-5"></i>
-                                    <span class="fw-semibold text-white">Data Structures</span>
+                                    <i class="bi bi-cpu text-primary fs-5"></i>
+                                    <span class="fw-semibold text-dark">Data Structures</span>
                                 </div>
-                                <span class="small text-muted">โครงสร้างข้อมูลและขั้นตอนวิธี</span>
+                                <span class="small text-muted">โครงสร้างข้อมูลและการออกแบบขั้นตอนวิธี</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Projects Section -->
-                <div class="glass-card" id="projects">
-                    <div class="section-header">
-                        <span class="section-badge"><i class="bi bi-kanban me-1"></i> Showcase</span>
-                        <h2 class="section-title h4 mb-1">ผลงานและโครงการ (Projects)</h2>
-                        <p class="text-muted small mb-0">โปรเจกต์ที่ได้ลงมือพัฒนาจริง</p>
+                <div class="clean-card" id="projects">
+                    <div class="mb-3">
+                        <span class="section-tag"><i class="bi bi-folder-check me-1"></i> Work & Practice</span>
+                        <h2 class="section-heading mb-1">ผลงานและโครงงาน (Projects)</h2>
+                        <p class="text-muted small mb-0">โปรเจกต์และผลงานที่สร้างขึ้นจริง</p>
                     </div>
 
-                    <div class="row g-3">
+                    <div class="row g-3 pt-2">
                         <div class="col-md-6">
-                            <div class="project-card">
+                            <div class="project-item">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <div class="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-25">Featured</div>
-                                    <a href="https://github.com/RUDYsama/my-portfolio" target="_blank" class="text-muted hover-white"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Featured Project</span>
+                                    <a href="https://github.com/RUDYsama/my-portfolio" target="_blank" class="text-muted text-hover-primary"><i class="bi bi-arrow-up-right"></i></a>
                                 </div>
-                                <h3 class="h5 fw-bold text-white mb-2">IT Portfolio Website</h3>
+                                <h3 class="h5 fw-bold text-dark mb-2">IT Portfolio Website</h3>
                                 <p class="small text-muted flex-grow-1">เว็บไซต์พอร์ตโฟลิโอส่วนตัวแบบ Responsive พร้อมฟีเจอร์ Interactive Avatar Animation และระบบ Smooth Inertia Scroll</p>
                                 <div class="d-flex flex-wrap gap-1 mt-2">
-                                    <span class="project-badge">Bootstrap 5</span>
-                                    <span class="project-badge">Lenis Scroll</span>
-                                    <span class="project-badge">GitHub Pages</span>
+                                    <span class="project-pill">Bootstrap 5</span>
+                                    <span class="project-pill">Smooth Scroll</span>
+                                    <span class="project-pill">GitHub Pages</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="project-card">
+                            <div class="project-item">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <div class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-25">Lab 12</div>
-                                    <a href="https://github.com/RUDYsama" target="_blank" class="text-muted hover-white"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">Lab 12</span>
+                                    <a href="https://github.com/RUDYsama" target="_blank" class="text-muted text-hover-primary"><i class="bi bi-arrow-up-right"></i></a>
                                 </div>
-                                <h3 class="h5 fw-bold text-white mb-2">Version Control Workflow</h3>
-                                <p class="small text-muted flex-grow-1">ปฏิบัติการจัดการโค้ดอย่างเป็นระบบด้วย Git Workflow, การสร้าง Branch, Commit History และการโฮสต์ผลงานด้วย GitHub</p>
+                                <h3 class="h5 fw-bold text-dark mb-2">Version Control Practice</h3>
+                                <p class="small text-muted flex-grow-1">ปฏิบัติการจัดการซอร์สโค้ดด้วย Git Workflow, การบันทึก Commit อย่างมีแบบแผน และการโฮสต์ผ่าน GitHub Pages</p>
                                 <div class="d-flex flex-wrap gap-1 mt-2">
-                                    <span class="project-badge">Git</span>
-                                    <span class="project-badge">CLI / Bash</span>
-                                    <span class="project-badge">Static Host</span>
+                                    <span class="project-pill">Git</span>
+                                    <span class="project-pill">Git Bash</span>
+                                    <span class="project-pill">Version Control</span>
                                 </div>
                             </div>
                         </div>
@@ -687,53 +679,76 @@
     <footer class="text-center">
         <div class="container">
             <div class="d-flex justify-content-center gap-3 mb-3">
-                <a href="https://github.com/RUDYsama" target="_blank" class="text-muted fs-4"><i class="bi bi-github"></i></a>
-                <a href="mailto:Nutbotluvpotato@gmail.com" class="text-muted fs-4"><i class="bi bi-envelope-at-fill"></i></a>
+                <a href="https://github.com/RUDYsama" target="_blank" class="text-secondary fs-4"><i class="bi bi-github"></i></a>
+                <a href="mailto:Nutbotluvpotato@gmail.com" class="text-secondary fs-4"><i class="bi bi-envelope-at-fill"></i></a>
             </div>
-            <p class="mb-1 text-white fw-semibold">Rudy — Student ID: 67310079</p>
-            <p class="small text-muted mb-0">Crafted with modern HTML5, CSS3, Bootstrap 5 & Lenis Smooth Scroll</p>
+            <p class="mb-1 text-dark fw-semibold">Rudy — Student ID: 67310079</p>
+            <p class="small text-muted mb-0">Crafted with HTML5, CSS3, Bootstrap 5 & Pure Smooth Inertia Scroll</p>
         </div>
     </footer>
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Lenis Smooth Scroll (Silky inertia scrolling that replaces jerky mousewheel ticks) -->
-    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
     <script>
-        // 1. Initialize Lenis Smooth Inertia Scrolling
-        const lenis = new Lenis({
-            duration: 1.25,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
+        // --- 1. Pure Smooth Inertia Wheel Scroll ---
+        (function() {
+            let targetY = window.scrollY;
+            let currentY = window.scrollY;
+            let isRunning = false;
+            const easeFactor = 0.12; // ตอบสนองไว ลื่นไหล ไม่หน่วง
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
+            window.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                targetY = Math.max(0, Math.min(maxScroll, targetY + e.deltaY));
 
-        // Smooth scroll for anchor links with Lenis
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId !== '#') {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        e.preventDefault();
-                        lenis.scrollTo(targetElement, { offset: -70 });
-                    }
+                if (!isRunning) {
+                    isRunning = true;
+                    requestAnimationFrame(animateScroll);
                 }
-            });
-        });
+            }, { passive: false });
 
-        // 2. Interactive Profile Avatar: 360 Spin + Fade out old / Fade in new image
+            function animateScroll() {
+                currentY += (targetY - currentY) * easeFactor;
+                window.scrollTo(0, currentY);
+
+                if (Math.abs(targetY - currentY) > 0.5) {
+                    requestAnimationFrame(animateScroll);
+                } else {
+                    window.scrollTo(0, targetY);
+                    currentY = targetY;
+                    isRunning = false;
+                }
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!isRunning) {
+                    targetY = window.scrollY;
+                    currentY = window.scrollY;
+                }
+            }, { passive: true });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        const elem = document.querySelector(targetId);
+                        if (elem) {
+                            e.preventDefault();
+                            const topPos = elem.getBoundingClientRect().top + window.scrollY - 80;
+                            targetY = Math.max(0, topPos);
+                            if (!isRunning) {
+                                isRunning = true;
+                                requestAnimationFrame(animateScroll);
+                            }
+                        }
+                    }
+                });
+            });
+        })();
+
+        // --- 2. Interactive Profile Avatar: Synchronized Spin (0.55s) + Crossfade in-flight ---
         const avatarWrapper = document.getElementById('avatarWrapper');
         const avatarInner = document.getElementById('avatarInner');
         const avatarPrimary = document.getElementById('avatar-primary');
@@ -747,27 +762,24 @@
             if (isAnimating) return;
             isAnimating = true;
 
-            // หมุน 360 องศาแบบ smooth
+            // หมุนและ Fade พร้อมกันทันทีที่คลิก
             currentRotation += 360;
-            avatarInner.style.transform = `rotate(${currentRotation}deg) scale(0.94)`;
+            avatarInner.style.transform = `rotate(${currentRotation}deg)`;
 
-            // ในขณะที่กำลังหมุน (ครึ่งทาง) ให้ Fade out รูปเดิม และ Fade in รูปใหม่
-            setTimeout(() => {
-                if (isPrimary) {
-                    avatarPrimary.style.opacity = '0';
-                    avatarSecondary.style.opacity = '1';
-                } else {
-                    avatarPrimary.style.opacity = '1';
-                    avatarSecondary.style.opacity = '0';
-                }
-                isPrimary = !isPrimary;
-            }, 300);
+            // Cross-fade เกิดขึ้นตลอดเวลาที่กำลังหมุน (0.55s)
+            if (isPrimary) {
+                avatarPrimary.style.opacity = '0';
+                avatarSecondary.style.opacity = '1';
+            } else {
+                avatarPrimary.style.opacity = '1';
+                avatarSecondary.style.opacity = '0';
+            }
+            isPrimary = !isPrimary;
 
-            // คืนขนาดรูป scale กลับมาปกติเมื่อหมุนจบ
+            // เมื่อหมุนครบ 0.55s รูปจะเปลี่ยนสมบูรณ์พร้อมกันพอดี
             setTimeout(() => {
-                avatarInner.style.transform = `rotate(${currentRotation}deg) scale(1)`;
                 isAnimating = false;
-            }, 800);
+            }, 550);
         });
     </script>
 </body>
